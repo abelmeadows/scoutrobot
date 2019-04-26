@@ -1,12 +1,9 @@
 # scoutrobot
 
-We have successfully implemented the autonomous navigation of UAV with our custom python node using LiDAR ; 
-2D mapping with Hector SLAM and 3D mapping using Octomap algorithms in the ROS simulation environment. 
-We also implemented an algorithm to manage the battery life of the UAV though which the UAV can use to return
-home when the battery-level drops down to a certain percentage.
-We added a takeoff and lad override to the ROS teleop_twist keyboard 
+We have successfully implemented the autonomous navigation of UAV with our custom python node (scoutrobot_control.py) using scan data from LiDAR and kinect sensor; 2D mapping with Hector SLAM and 3D mapping using Octomap algorithms in the ROS simulation environment. 
+We also implemented an algorithm to manage the battery life of the UAV which the UAV can use to return home when the battery-level drops down to a certain percentage. We added a takeoff and land override to the ROS teleop_twist keyboard 
 
-This is built on the existing hector_SLAM, octomap and cvg_sim_gazebo packages 
+This pacakges is built on the existing hector_SLAM, octomap and cvg_sim_gazebo packages 
 
 BASIC SETUP:
 
@@ -35,12 +32,12 @@ cd catkin_ws
 source devel/setup.bash 
 
 GAZEBO and RVIZ:
-roslaunch cvg_sim_gazebo scoutrobot_world2.launch (it launches octomap so you don't need to launch it separately)
+roslaunch cvg_sim_gazebo scoutrobot_1.launch (it launches octomap so you don't need to launch it separately)
 
 roslaunch hector_mapping mapping_default.launch (it rviz octomap so you don't need to launch it separately)
 
 CONTROL NODE:
-rosrun scoutrobot_control nav2Original_command.py
+rosrun scoutrobot_control scoutrobot_control.py
 
 KEYBOARD:
 rosrun teleop_twist_keyboard teleop_twist_keyboard_custom.py
