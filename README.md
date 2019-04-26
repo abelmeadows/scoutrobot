@@ -1,4 +1,4 @@
-# scoutrobot
+# scoutrobot - A project by Abel Stephen Olumide, Adeolu Akinwa and Dr. Ahmed A .Ahmed; Computer Science  Department, College of Engineering, Prairie View A&M University, Texas, United States 
 
 We have successfully implemented the autonomous navigation of UAV with our custom python node (scoutrobot_control.py) using scan data from LiDAR and kinect sensor; 2D mapping with Hector SLAM and 3D mapping using Octomap algorithms in the ROS simulation environment. 
 We also implemented an algorithm to manage the battery life of the UAV which the UAV can use to return home when the battery-level drops down to a certain percentage. We added a takeoff and land override to the ROS teleop_twist keyboard 
