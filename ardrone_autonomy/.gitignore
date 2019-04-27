@@ -1,0 +1,34 @@
+# Compiled Object files
+*.slo
+*.lo
+*.o
+
+# Project Files
+*.sublime-workspace
+*.sublime-project
+
+# Compiled Dynamic libraries
+*.so
+
+# Compiled Static libraries
+*.lai
+*.la
+*.a
+/nbproject/private/
+/build/CMakeFiles/
+
+# Build results
+/ARDroneLib/FFMPEG/Includes
+/ARDroneLib/FFMPEG/FFMPEG
+/ARDroneLib/Soft/Build/
+/ARDroneLib/Soft/Common/generated_custom.h
+/bin
+/build/
+/msg_gen
+/srv_gen
+/src/ardrone_autonomy
+scripts/cache/DEBS_avail
+CMakeLists.txt.user
+
+# Documentations
+docs/_build/
