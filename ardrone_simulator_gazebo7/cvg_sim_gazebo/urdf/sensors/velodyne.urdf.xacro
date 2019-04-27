@@ -1,0 +1,75 @@
+<?xml version="1.0"?>
+
+<robot xmlns:sensor="http://playerstage.sourceforge.net/gazebo/xmlschema/#sensor"
+xmlns:controller="http://playerstage.sourceforge.net/gazebo/xmlschema/#controller"
+xmlns:interface="http://playerstage.sourceforge.net/gazebo/xmlschema/#interface"
+  xmlns:xacro="http://ros.org/wiki/xacro"
+  >  
+    <xacro:macro name="velodyne" params="*origin">
+      <joint name="laser_joint" type="fixed">
+	<insert_block name="origin" />
+	<parent link="base_link"/>
+	<child link="laser_frame"/>
+      </joint>
+<link name="laser_frame">
+	<inertial>
+	  <mass value="0.001" />
+	  <origin xyz="0 0 0" rpy="0 0 0" />
+		<inertia ixx="0.0001" ixy="0" ixz="0" iyy="0.0001" iyz="0" izz="0.0001" />
+	</inertial>
+	<visual>
+	  <origin xyz="0 0 0" rpy="0 0 0" />
+          <geometry>
+          <!--<mesh filename="package://velodyne_description/meshes/HDL32E_base.dae" /> -->
+        </geometry>
+	</visual>
+	<collision>
+	  <origin xyz="0 0 -0.0115" rpy="0 0 0" />
+          <geometry>
+          <box size="0.058 0.058 0.087" />
+          <mesh filename="package://hector_sensors_description/meshes/hokuyo_utm30lx/hokuyo_utm_30lx.stl"/>
+          
+        </geometry>
+	</collision>
+</link>
+      
+   
+ <!--Gazebo Hokuyo Laser Plugin-->
+  <gazebo reference="laser_frame">
+  <sensor type="gpu_ray" name="velodyne_sensor_laser">
+    <pose>0.0 0.0 0.0 0.0 0 0</pose>
+    <visualize>true</visualize>
+    <update_rate>10</update_rate>
+    <ray>
+      <scan>
+        <horizontal>
+          <samples>720</samples>
+          <min_angle>-1.5708</min_angle> <!-- 90deg = 1.5708rad, 120deg = 2.09rad-->
+          <max_angle>1.5708</max_angle>
+        </horizontal>
+        <vertical>
+          <samples>15</samples>
+          <min_angle>-0.785</min_angle>
+          <max_angle>0</max_angle>
+        </vertical>
+      </scan>
+      <range>
+        <min>0.30</min>
+        <max>100.0</max>
+      </range>
+    </ray>
+    <plugin name="gazebo_ros_velodyne_controller_laser" filename="libgazebo_ros_gpu_laser.so">
+      <topicName>/multi_scan</topicName>
+      <frameName>laser_frame</frameName>
+      <alwaysOn>true</alwaysOn>
+      <gaussianNoise>0.00</gaussianNoise>
+      <updateRate>10.0</updateRate>
+      <hokuyoMinIntensity>1</hokuyoMinIntensity>
+    </plugin>
+  </sensor>
+</gazebo>
+
+      
+    </xacro:macro>
+  </robot>
+  

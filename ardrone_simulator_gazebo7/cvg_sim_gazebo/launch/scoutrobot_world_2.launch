@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<launch>
+  <!-- We resume the logic in empty_world.launch, changing only the name of the world to be launched -->
+  <include file="$(find gazebo_ros)/launch/empty_world.launch">
+    <!--<arg name="world_name" value="$(find cvg_sim_gazebo)/worlds/ardrone_mazelike_topless.world"/> -->
+    <arg name="world_name" value="$(find cvg_sim_gazebo)/worlds/scoutrobot_world_2b.world"/>
+  </include>
+
+  <!-- Spawn simulated quadrotor uav -->
+  <include file="$(find cvg_sim_gazebo)/launch/spawn_quadrotor.launch" >
+    <arg name="model" value="$(find cvg_sim_gazebo)/urdf/quadrotor_sensors.urdf.xacro"/> 
+  </include>
+
+   <!-- Launch RVIZ and mapping
+  <include file="$(find hector_mapping)/launch/mapping_default.launch" >
+  </include>-->
+
+ <!-- Launch OCTOMAP-->
+  <include file="$(find octomap_server)/launch/octomap_mapping.launch" >
+  </include> 
+  
+</launch>
+

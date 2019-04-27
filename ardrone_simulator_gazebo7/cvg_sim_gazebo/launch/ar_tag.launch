@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<launch>
+	<!-- We resume the logic in empty_world.launch, changing only the name of the world to be launched -->
+	<include file="$(find gazebo_ros)/launch/empty_world.launch">
+	<arg name="world_name" value="$(find cvg_sim_gazebo)/worlds/ar_tag_alvar_multiple.world"/>
+	</include>
+
+	<!-- Spawn simulated quadrotor uav -->
+	<include file="$(find cvg_sim_gazebo)/launch/spawn_quadrotor.launch" >
+	<arg name="model" value="$(find cvg_sim_gazebo)/urdf/quadrotor_sensors.urdf.xacro"/> 
+	</include>
+	
+  	<arg name="pid_namespace" default="pandora_ardrone2_pid" />
+
+  	<node
+    	name="pandora_ardrone2_pid_node"
+    	type="pandora_ardrone2_pid_node"
+    	pkg="pandora_ardrone2_pid"
+    	respawn="False"
+    	output="screen"
+    	ns="$(arg pid_namespace)" >
+  	</node>
+
+
+</launch>

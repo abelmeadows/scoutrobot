@@ -1,0 +1,27 @@
+cd catkin_ws
+source devel/setup.bash 
+roslaunch cvg_sim_gazebo scoutrobot_world_2.launch
+roslaunch hector_mapping mapping_default.launch
+rosrun scoutrobot_control scoutrobot_control.py
+rqt_graph
+roslaunch openni_launch openni.launch
+
+
+BEBOP:
+roslaunch bebop_driver bebop_node.launch
+rostopic pub --once [namespace]/takeoff std_msgs/Empty
+rostopic pub --once [namespace]/land std_msgs/Empty
+
+KEYBOARD:
+rosrun teleop_twist_keyboard teleop_twist_keyboard_custom.py
+
+MOVEIT
+roslaunch scoutrobot_moveit_config demo.launch
+
+OCTOMAP
+roslaunch octomap_server octomap_mapping.launch
+
+MANUAL
+Takeoff:
+rostopic pub -1 /ardrone/takeoff std_msgs/Empty
+rostopic pub -r 10 /cmd_vel geometry_msgs/Twist  '{linear:  {x: 0.1, y: 0.0, z: 0.0}, angular: {x: 0.0,y: 0.0,z: 0.0}}'

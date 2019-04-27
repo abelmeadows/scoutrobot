@@ -1,0 +1,74 @@
+<?xml version="1.0"?>
+
+<robot xmlns:sensor="http://playerstage.sourceforge.net/gazebo/xmlschema/#sensor"
+xmlns:controller="http://playerstage.sourceforge.net/gazebo/xmlschema/#controller"
+xmlns:interface="http://playerstage.sourceforge.net/gazebo/xmlschema/#interface"
+  xmlns:xacro="http://ros.org/wiki/xacro"
+  >  
+    <xacro:macro name="hokuyo_utm30lx" params="*origin">
+      <joint name="laser_joint" type="fixed">
+	<insert_block name="origin" />
+	<parent link="base_link"/>
+	<child link="laser_frame"/>
+      </joint>
+<link name="laser_frame">
+	<inertial>
+	  <mass value="0.001" />
+	  <origin xyz="0 0 0" rpy="0 0 0" />
+		<inertia ixx="0.0001" ixy="0" ixz="0" iyy="0.0001" iyz="0" izz="0.0001" />
+	</inertial>
+	<visual>
+	  <origin xyz="0 0 0" rpy="0 0 0" />
+          <geometry>
+
+          <mesh filename="package://cvg_sim_gazebo/meshes/hokuyo_utm30lx/hokuyo_utm_30lx$(optenv TEST_SELF_FILTER).dae"/>
+        </geometry>
+	</visual>
+	<collision>
+	  <origin xyz="0 0 -0.0115" rpy="0 0 0" />
+          <geometry>
+          <box size="0.058 0.058 0.087" />
+          <!--<mesh filename="package://hector_sensors_description/meshes/hokuyo_utm30lx/hokuyo_utm_30lx.stl"/>-->
+          
+        </geometry>
+	</collision>
+</link>
+      
+   
+ <!--Gazebo Hokuyo Laser Plugin-->
+  <gazebo reference="laser_frame">
+    <sensor type="ray" name="laser">
+      <pose>0 0 0 0 0 0</pose>
+      <visualize>true</visualize>
+      <update_rate>60</update_rate>
+      <ray>
+        <scan>
+          <horizontal>
+            <samples>720</samples>
+            <resolution>1</resolution>
+            <min_angle>-1.570796</min_angle> <!--try -1.570796 to 1.570796 (-90 deg to 90 deg) or -3.141592 to 3.141592 (-180deg to 180deg)-->
+            <max_angle>1.570796</max_angle>
+          </horizontal>
+        </scan>
+        <range>
+          <min>0.10</min>
+          <max>30.0</max>
+          <resolution>0.01</resolution>
+        </range>
+        <noise>
+          <type>gaussian</type>
+          <mean>0.0</mean>
+          <stddev>0.01</stddev>
+        </noise>
+      </ray>
+      <plugin name="gazebo_ros_head_hokuyo_controller" filename="libgazebo_ros_laser.so">
+        <topicName>scan</topicName>
+        <frameName>laser_frame</frameName>
+      </plugin>
+    </sensor>
+  </gazebo>
+
+      
+    </xacro:macro>
+  </robot>
+  

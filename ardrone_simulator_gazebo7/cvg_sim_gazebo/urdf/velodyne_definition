@@ -1,0 +1,33 @@
+<gazebo reference="laser_frame">
+  <sensor type="gpu_ray" name="velodyne_sensor_laser">
+    <pose>0.0 0.0 0.0 0.0 0 0</pose>
+    <visualize>true</visualize>
+    <update_rate>10</update_rate>
+    <ray>
+      <scan>
+        <horizontal>
+          <samples>720</samples>
+          <min_angle>-0.785</min_angle>
+          <max_angle>0.785</max_angle>
+        </horizontal>
+        <vertical>
+          <samples>16</samples>
+          <min_angle>-0.26</min_angle>
+          <max_angle>0.26</max_angle>
+        </vertical>
+      </scan>
+      <range>
+        <min>0.30</min>
+        <max>100.0</max>
+      </range>
+    </ray>
+    <plugin name="gazebo_ros_velodyne_controlle_laser" filename="libgazebo_ros_gpu_laser.so">
+      <topicName>/velodyne_laser</topicName>
+      <frameName>velodyne_laser</frameName>
+      <alwaysOn>true</alwaysOn>
+      <gaussianNoise>0.00</gaussianNoise>
+      <updateRate>10.0</updateRate>
+      <hokuyoMinIntensity>1</hokuyoMinIntensity>
+    </plugin>
+  </sensor>
+</gazebo>
