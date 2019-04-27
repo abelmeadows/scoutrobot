@@ -8,23 +8,33 @@ This pacakges is built on the existing hector_SLAM, octomap and cvg_sim_gazebo p
 
 BASIC SETUP:
 
-Install ROS Kinectic: http://wiki.ros.org/kinetic/Installation
+1. Install ROS Kinectic: http://wiki.ros.org/kinetic/Installation
 
-Install Gazebo: sudo apt-get install ros-kinetic-gazebo-ros-pkgs ros-kinetic-gazebo-ros-control
+2. Install Gazebo-ROS packages: sudo apt-get install ros-kinetic-gazebo-ros-pkgs ros-kinetic-gazebo-ros-control
 
-Install all octomap dependencies: sudo apt-get install ros-kinetic-octomap*
+3. Create a workspace for your project:
 
-Clone this scoutrobot repository which already contains the cvg_sim_gazebo, hector_mapping and octomap_mapping
+$ mkdir -p ~/scoutrobot_ws/src
+$ cd ~/scoutrobot_ws/
+$ catkin_make
 
-Edit mapping_default.launch in hector_mapping package to suit your project
+4. Install all octomap dependencies: sudo apt-get install ros-kinetic-octomap*
 
-Edit octomap_mapping.launch in octomap_server package also
+5. Clone this scoutrobot.zip repository which already contains the cvg_sim_gazebo, hector_mapping and octomap_mapping. Extract the content of scoutrobot.zip to a location on your machine and copy them all to scoutrobot_ws/src and 
 
-cd to scoutrobot_ws
+6. Build the workspace again:
+   $ cd ~/scoutrobot_ws/
+   $ catkin_make
 
-Run catkin_make
+6. Edit mapping_default.launch in hector_mapping package to suit your project
 
-Run source devel/setup.bash
+7. Edit octomap_mapping.launch in octomap_server package also
+
+8. cd to scoutrobot_ws
+
+9. Run catkin_make
+
+10. Run source devel/setup.bash
 
 LAUNCH COMMAND:
 
